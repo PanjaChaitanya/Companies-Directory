@@ -13,7 +13,7 @@ const CompanyCard = ({ company }) => {
   return (
     <>
       {/* Card */}
-      <div className="cursor-pointer rounded-lg shadow-md hover:shadow-lg hover:shadow-blue-100 transition p-4 bg-white" onClick={openModal}> 
+      <div className="cursor-pointer rounded-lg border border-neutral-200 shadow-md hover:shadow-lg hover:shadow-blue-200 transition p-4 bg-white" onClick={openModal}> 
         {/* Header */} 
         <div className="flex flex-wrap justify-between items-start mb-3">
           <div className="flex items-center gap-3">
@@ -21,7 +21,7 @@ const CompanyCard = ({ company }) => {
               <Building2 className="h-6 w-6 text-white" />
             </div>
             <div> 
-              <h3 className="text-lg font-semibold text-gray-800">{company.name}</h3> 
+              <h3 className="text-lg font-semibold text-gray-800 hover:text-[#3869EC]">{company.name}</h3> 
               <div className="flex items-center gap-1 mt-1 text-gray-500 text-sm">
                 <MapPin className="h-4 w-4" /> {company.location}
               </div>
@@ -47,7 +47,7 @@ const CompanyCard = ({ company }) => {
           onClick={closeModal}
         >
           <div
-            className="bg-white rounded-2xl shadow-2xl w-[600px] max-w-full p-6 relative animate-fadeIn"
+            className="bg-white rounded-2xl border border-neutral-200 shadow-2xl w-[600px] max-w-full p-6 relative animate-fadeIn"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Close Button */}
@@ -80,18 +80,18 @@ const CompanyCard = ({ company }) => {
 
             {/* Info Cards */}
             <div className="grid grid-cols-2 gap-3 border-t border-gray-200 pt-4">
-              <div className="bg-gray-50 rounded-xl p-3 text-center">
+              <div className="bg-blue-50 rounded-xl p-3 text-center">
                 <p className="text-xs text-gray-500 flex items-center justify-center gap-1">
-                  <Users className="h-5 w-5" /> Employees
+                  <Users className="h-5 w-5 text-[#3A6FE1]" /> Employees
                 </p>
                 <p className="text-lg font-semibold text-gray-800">
                   {company.employees}
                 </p>
               </div>
 
-              <div className="bg-gray-50 rounded-xl p-3 text-center">
+              <div className="bg-blue-50 rounded-xl p-3 text-center">
                 <p className="text-xs text-gray-500 flex items-center justify-center gap-1">
-                  <Globe className="h-3 w-3" /> Industry
+                  <Globe className="h-5 w-5 text-[#3A6FE1] " /> Industry
                 </p>
                 <p className="text-lg font-semibold text-gray-800">
                   {company.industry}

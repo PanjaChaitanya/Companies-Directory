@@ -41,7 +41,7 @@ const CompanyList = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 bg-neutral-100 p-5 rounded-lg">
         {paged.map(c => <CompanyCard key={c.id} company={c} />)}
       </div>
 
