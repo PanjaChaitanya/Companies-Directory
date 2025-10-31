@@ -1,22 +1,26 @@
+---
+
 ```markdown
 # 🏢 Companies Directory — Frontend Project
 
 A responsive and dynamic **Companies Directory** web application built using **React.js** and **Tailwind CSS**.  
-This project was developed as part of the **Frontlines Media Technical Assessment**.
+This project was developed as part of the **Frontlines Media Assessment Task**.
 
-It showcases the use of **React Context API**, **custom filtering**, **sorting**, **pagination**, and a **modular UI design** — all without external API calls (using a mock `companies.json` file).
+It demonstrates efficient use of **React Context API**, **custom filtering**, **sorting**, **pagination**, and **modular UI design** with **Tailwind CSS** — all without any external API calls (using a mock `companies.json` file).
+
+---
 
 ## 🚀 Features
 
-- 🔍 **Search** — Instantly filter companies by name.  
-- 🏭 **Filter by Industry & Location** — Dynamic multi-criteria filtering.  
-- ↕️ **Sorting** — Sort alphabetically or by employee count.  
-- 📑 **Pagination** — Display limited results per page.  
-- ⚙️ **Global State** — Managed efficiently with **React Context API**.  
-- 🧩 **Reusable Components** — Modular and scalable structure.  
-- 🎨 **Tailwind CSS Styling** — Clean, modern, and fully responsive UI.  
-- ✅ **Error & Loading States** — Graceful fallback handling.  
-- 🌐 **Deployed on Vercel** — Production-ready hosting.
+- 🔍 **Search Functionality** — Instantly filter companies by name.
+- 🏭 **Filter by Industry & Location** — Narrow down results dynamically.
+- ↕️ **Sorting** — Sort companies alphabetically or by number of employees.
+- 📑 **Pagination** — Display a fixed number of records per page for cleaner UI.
+- ⚙️ **Global State Management** — Managed efficiently using **React Context API**.
+- 🧩 **Reusable Components** — Modular structure for better scalability.
+- 🎨 **Tailwind CSS Styling** — Clean, modern, and fully responsive design.
+- ✅ **Error & Loading States** — Graceful handling of data fetch errors and loading screens.
+- 🌐 **Deployed on Vercel** — Fast and production-ready deployment.
 
 ---
 
@@ -24,12 +28,12 @@ It showcases the use of **React Context API**, **custom filtering**, **sorting**
 
 | Category | Tools / Libraries |
 |-----------|-------------------|
-| **Frontend** | React.js (Hooks, Functional Components) |
+| **Frontend** | React.js (Functional Components, Hooks) |
 | **State Management** | React Context API |
 | **Styling** | Tailwind CSS |
-| **Build Tool** | Vite / Create React App |
+| **Build Tool** | Vite / Create React App (depending on setup) |
 | **Deployment** | Vercel |
-| **Data Source** | `companies.json` (Mock Static API) |
+| **Data Source** | `companies.json` (Static Mock API) |
 
 ---
 
@@ -38,20 +42,25 @@ It showcases the use of **React Context API**, **custom filtering**, **sorting**
 ```
 
 companies-directory/
+│
 ├── public/
-│   ├── companies.json        # Mock API data
+│   ├── companies.json          # Mock API data
 │   └── index.html
+│
 ├── src/
 │   ├── components/
-│   │   ├── CompanyCard.jsx   # Individual company card
-│   │   ├── CompanyList.jsx   # Filters, sorting, pagination logic
-│   │   ├── Pagination.jsx    # Pagination component
-│   │   └── FilterBar.jsx     # Search and dropdown filters
+│   │   ├── CompanyCard.jsx     # UI card for each company
+│   │   ├── CompanyList.jsx     # Filters, sorting & pagination logic
+│   │   ├── Pagination.jsx      # Page navigation component
+│   │   └── FilterBar.jsx       # Dropdowns & search input
+│   │
 │   ├── context/
-│   │   └── CompanyContext.jsx # Global State (Context API)
-│   ├── App.jsx               # Root component
-│   ├── index.js              # Entry point
-│   └── styles.css            # Tailwind CSS imports
+│   │   └── CompanyContext.jsx  # Global state (Context API)
+│   │
+│   ├── App.jsx                 # Root component
+│   ├── index.js                # Entry point
+│   └── styles.css              # Tailwind import / custom CSS
+│
 ├── package.json
 └── README.md
 
@@ -61,13 +70,18 @@ companies-directory/
 
 ## ⚙️ Installation & Setup
 
-### 1️⃣ Clone the Repository
+Follow the steps below to set up the project locally.
+
+### 1️⃣ Clone the repository
+
 ```bash
 git clone https://github.com/yourusername/companies-directory.git
 cd companies-directory
 ````
 
-### 2️⃣ Install Dependencies
+### 2️⃣ Install dependencies
+
+Make sure **Node.js** and **npm** (or **yarn**) are installed.
 
 ```bash
 npm install
@@ -75,7 +89,7 @@ npm install
 yarn install
 ```
 
-### 3️⃣ Start the Development Server
+### 3️⃣ Start the development server
 
 ```bash
 npm start
@@ -83,21 +97,24 @@ npm start
 yarn start
 ```
 
-Visit 👉 **[http://localhost:3000](http://localhost:3000)**
+Then open your browser and visit:
+👉 **[http://localhost:3000](http://localhost:3000)**
 
-### 4️⃣ Build for Production
+### 4️⃣ Build for production
 
 ```bash
 npm run build
 ```
 
-This generates an optimized production build inside the `/build` directory.
+This creates an optimized production-ready build in the `/build` directory.
 
 ---
 
-## 📦 Mock Data — `companies.json`
+## 📦 Mock API — `companies.json`
 
-Located in `/public/companies.json`, serving as a static API.
+All company data is fetched from a static JSON file located in the `/public` folder.
+
+Example snippet:
 
 ```json
 [
@@ -122,35 +139,48 @@ Located in `/public/companies.json`, serving as a static API.
 
 ---
 
-## 🧠 Core Logic Overview
+## 🧠 Code Walkthrough (Core Logic)
 
-### 🧩 1. Global State — `CompanyContext.jsx`
+### **1. Global State — `CompanyContext.jsx`**
 
-Manages:
+Handles:
 
 * Fetching data from `companies.json`
-* Filters (search, location, industry)
-* Sorting, pagination, and error/loading states
+* Managing filters (search, location, industry)
+* Sorting and pagination
+* Error/loading handling
 
-Key logic snippet:
+Key Hooks used:
 
-```javascript
+```js
 useEffect(() => {
   fetch('/companies.json')
     .then(res => res.json())
-    .then(setCompanies)
+    .then(data => setCompanies(data))
     .catch(() => setError(true))
     .finally(() => setLoading(false));
 }, []);
 ```
 
+Also includes:
+
+```js
+resetFilters = () => {
+  setSearch('');
+  setSelectedLocation('');
+  setSelectedIndustry('');
+  setSortBy('name-asc');
+  setPage(1);
+};
+```
+
 ---
 
-### ⚙️ 2. Filtering & Sorting — `CompanyList.jsx`
+### **2. Filtering & Sorting — `CompanyList.jsx`**
 
-Optimized with `useMemo()` to avoid unnecessary re-renders.
+Uses `useMemo()` for performance optimization — only recalculates filtered data when dependencies change.
 
-```javascript
+```js
 const filtered = useMemo(() => {
   let arr = companies.slice();
 
@@ -158,52 +188,76 @@ const filtered = useMemo(() => {
   if (selectedLocation) arr = arr.filter(c => c.location === selectedLocation);
   if (selectedIndustry) arr = arr.filter(c => c.industry === selectedIndustry);
 
-  if (sortBy === 'name-asc') arr.sort((a, b) => a.name.localeCompare(b.name));
-  else if (sortBy === 'employees-desc') arr.sort((a, b) => b.employees - a.employees);
+  if (sortBy === 'name-asc') arr.sort((a,b)=> a.name.localeCompare(b.name));
+  else if (sortBy === 'employees-desc') arr.sort((a,b)=> b.employees - a.employees);
 
   return arr;
 }, [companies, search, selectedLocation, selectedIndustry, sortBy]);
 ```
 
-Pagination logic:
+Then applies pagination logic:
 
-```javascript
+```js
+const total = filtered.length;
 const start = (page - 1) * pageSize;
 const paged = filtered.slice(start, start + pageSize);
 ```
 
 ---
 
-### 🧱 3. Conditional UI Rendering
+### **3. UI Rendering**
 
-```jsx
+Conditional rendering for clean UX:
+
+```js
 if (loading) return <div>Loading companies...</div>;
-if (error) return <div>Failed to load data.</div>;
+if (error) return <div>Failed to load company data.</div>;
 if (!filtered.length) return <div>No companies found.</div>;
+```
 
+Cards are displayed using:
+
+```js
 {paged.map(c => <CompanyCard key={c.id} company={c} />)}
 ```
 
 ---
 
-## 🎨 Styling
+### **4. Reusable onChange Handler**
 
-Built entirely with **Tailwind CSS** for:
+A higher-order function to handle dropdown changes efficiently:
+
+```js
+const onChange = (setter) => (e) => {
+  setter(e.target.value);
+  setPage(1);
+};
+```
+
+---
+
+### **5. Styling**
+
+Fully built with **Tailwind CSS**, ensuring:
 
 * Responsive grid layout
-* Consistent spacing and typography
-* Light/dark-friendly color scheme
+* Clean spacing and typography
+* Consistent theme for light/dark backgrounds
 
 ---
 
 ## 🌍 Deployment (Vercel)
 
-1. Push project to GitHub
-2. Go to [vercel.com](https://vercel.com)
-3. Import your repository
-4. Click **Deploy** — done ✅
+### Steps:
 
-**Live Demo:** [https://companies-directory.vercel.app](https://companies-directory.vercel.app)
+1. Push your code to a GitHub repository.
+2. Go to [Vercel](https://vercel.com/).
+3. Import the GitHub repo.
+4. Click **Deploy** — that’s it!
+   Vercel automatically detects the React project and builds it.
+
+✅ **Live Link Example:**
+[https://companies-directory.vercel.app](https://companies-directory.vercel.app)
 
 ---
 
@@ -211,11 +265,10 @@ Built entirely with **Tailwind CSS** for:
 
 This project demonstrates:
 
-* Strong grasp of **React fundamentals** (hooks, props, context)
-* Efficient **state management** with Context API
-* Clean, modular component architecture
-* Fully responsive **Tailwind UI**
-* Optimized performance and maintainable code structure
+* Clear understanding of **React fundamentals** (hooks, props, context)
+* Efficient **state management**
+* **Clean modular design** using reusable components
+* **Frontend architecture** optimized for readability and performance
 
 ---
 
@@ -223,23 +276,21 @@ This project demonstrates:
 
 **Chaitanya Panja**
 📧 Email: [panjachaitanya23@gmail.com](mailto:panjachaitanya23@gmail.com)
-🔗 GitHub: [github.com/PanjaChaitanya](https://github.com/PanjaChaitanya)
-🔗 LinkedIn: [linkedin.com/in/chaitanyapanja](https://www.linkedin.com/in/chaitanyapanja)
+🔗 GitHub: [https://github.com/PanjaChaitanya](https://github.com/PanjaChaitanya)
+🔗 LinkedIn: [https://www.linkedin.com/in/chaitanyapanja](https://www.linkedin.com/in/chaitanyapanja)
 
 ---
 
-> 💻 Built with ❤️ using React.js and Tailwind CSS
+### 🏁 Final Output Preview
+
+![Project Screenshot](./screenshot.png)
+
+> Built with ❤️ using React.js and Tailwind CSS.
 
 ```
 
 ---
 
-✅ **What’s improved:**
-- Removed redundant code explanations and repeated setup steps.  
-- Fixed all markdown formatting errors (headings, code blocks, and lists).  
-- Structured sections logically — intro → features → setup → logic → deployment.  
-- Added cleaner indentation and better readability.  
-- Ensured it's **ATS-friendly** and professional for GitHub or portfolio display.  
-
-Would you like me to make it **GitHub-optimized** (with emojis, badges, and clickable sections for navigation)? That version looks visually stronger for recruiters.
+Would you like me to **add a “Video Demo” section** (with a placeholder for your Loom or YouTube link and description timestamps)?  
+That makes it perfect for evaluation submissions and portfolio uploads.
 ```
