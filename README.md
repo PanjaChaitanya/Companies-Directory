@@ -1,4 +1,5 @@
-```markdown
+---
+
 # 🏢 Companies Directory — Frontend Project
 
 A responsive and dynamic **Companies Directory** web application built using **React.js** and **Tailwind CSS**.  
@@ -37,32 +38,7 @@ It demonstrates efficient use of **React Context API**, **custom filtering**, **
 
 ## 📂 Project Structure
 
-```
-
-companies-directory/
-│
-├── public/
-│   ├── companies.json          # Mock API data
-│   └── index.html
-│
-├── src/
-│   ├── components/
-│   │   ├── CompanyCard.jsx     # UI card for each company
-│   │   ├── CompanyList.jsx     # Filters, sorting & pagination logic
-│   │   ├── Pagination.jsx      # Page navigation component
-│   │   └── FilterBar.jsx       # Dropdowns & search input
-│   │
-│   ├── context/
-│   │   └── CompanyContext.jsx  # Global state (Context API)
-│   │
-│   ├── App.jsx                 # Root component
-│   ├── index.js                # Entry point
-│   └── styles.css              # Tailwind import / custom CSS
-│
-├── package.json
-└── README.md
-
-````
+companies-directory/ │ ├── public/ │   ├── companies.json          # Mock API data │   └── index.html │ ├── src/ │   ├── components/ │   │   ├── CompanyCard.jsx     # UI card for each company │   │   ├── CompanyList.jsx     # Filters, sorting & pagination logic │   │   ├── Pagination.jsx      # Page navigation component │   │   └── FilterBar.jsx       # Dropdowns & search input │   │ │   ├── context/ │   │   └── CompanyContext.jsx  # Global state (Context API) │   │ │   ├── App.jsx                 # Root component │   ├── index.js                # Entry point │   └── styles.css              # Tailwind import / custom CSS │ ├── package.json └── README.md
 
 ---
 
@@ -75,46 +51,39 @@ Follow the steps below to set up the project locally.
 ```bash
 git clone https://github.com/yourusername/companies-directory.git
 cd companies-directory
-````
 
-### 2️⃣ Install dependencies
+2️⃣ Install dependencies
 
-Make sure **Node.js** and **npm** (or **yarn**) are installed.
+Make sure Node.js and npm (or yarn) are installed.
 
-```bash
 npm install
 # or
 yarn install
-```
 
-### 3️⃣ Start the development server
+3️⃣ Start the development server
 
-```bash
 npm start
 # or
 yarn start
-```
 
 Then open your browser and visit:
-👉 **[http://localhost:3000](http://localhost:3000)**
+👉 http://localhost:3000
 
-### 4️⃣ Build for production
+4️⃣ Build for production
 
-```bash
 npm run build
-```
 
-This creates an optimized production-ready build in the `/build` directory.
+This creates an optimized production-ready build in the /build directory.
+
 
 ---
 
-## 📦 Mock API — `companies.json`
+📦 Mock API — companies.json
 
-All company data is fetched from a static JSON file located in the `/public` folder.
+All company data is fetched from a static JSON file located in the /public folder.
 
 Example snippet:
 
-```json
 [
   {
     "id": 1,
@@ -133,24 +102,27 @@ Example snippet:
     "description": "Innovating healthcare with digital diagnostics."
   }
 ]
-```
+
 
 ---
 
-## 🧠 Code Walkthrough (Core Logic)
+🧠 Code Walkthrough (Core Logic)
 
-### **1. Global State — `CompanyContext.jsx`**
+1. Global State — CompanyContext.jsx
 
 Handles:
 
-* Fetching data from `companies.json`
-* Managing filters (search, location, industry)
-* Sorting and pagination
-* Error/loading handling
+Fetching data from companies.json
+
+Managing filters (search, location, industry)
+
+Sorting and pagination
+
+Error/loading handling
+
 
 Key Hooks used:
 
-```js
 useEffect(() => {
   fetch('/companies.json')
     .then(res => res.json())
@@ -158,11 +130,9 @@ useEffect(() => {
     .catch(() => setError(true))
     .finally(() => setLoading(false));
 }, []);
-```
 
 Also includes:
 
-```js
 resetFilters = () => {
   setSearch('');
   setSelectedLocation('');
@@ -170,15 +140,14 @@ resetFilters = () => {
   setSortBy('name-asc');
   setPage(1);
 };
-```
+
 
 ---
 
-### **2. Filtering & Sorting — `CompanyList.jsx`**
+2. Filtering & Sorting — CompanyList.jsx
 
-Uses `useMemo()` for performance optimization — only recalculates filtered data when dependencies change.
+Uses useMemo() for performance optimization — only recalculates filtered data when dependencies change.
 
-```js
 const filtered = useMemo(() => {
   let arr = companies.slice();
 
@@ -191,104 +160,113 @@ const filtered = useMemo(() => {
 
   return arr;
 }, [companies, search, selectedLocation, selectedIndustry, sortBy]);
-```
 
 Then applies pagination logic:
 
-```js
 const total = filtered.length;
 const start = (page - 1) * pageSize;
 const paged = filtered.slice(start, start + pageSize);
-```
+
 
 ---
 
-### **3. UI Rendering**
+3. UI Rendering
 
 Conditional rendering for clean UX:
 
-```js
 if (loading) return <div>Loading companies...</div>;
 if (error) return <div>Failed to load company data.</div>;
 if (!filtered.length) return <div>No companies found.</div>;
-```
 
 Cards are displayed using:
 
-```js
 {paged.map(c => <CompanyCard key={c.id} company={c} />)}
-```
+
 
 ---
 
-### **4. Reusable onChange Handler**
+4. Reusable onChange Handler
 
 A higher-order function to handle dropdown changes efficiently:
 
-```js
 const onChange = (setter) => (e) => {
   setter(e.target.value);
   setPage(1);
 };
-```
+
 
 ---
 
-### **5. Styling**
+5. Styling
 
-Fully built with **Tailwind CSS**, ensuring:
+Fully built with Tailwind CSS, ensuring:
 
-* Responsive grid layout
-* Clean spacing and typography
-* Consistent theme for light/dark backgrounds
+Responsive grid layout
+
+Clean spacing and typography
+
+Consistent theme for light/dark backgrounds
+
+
 
 ---
 
-## 🌍 Deployment (Vercel)
+🌍 Deployment (Vercel)
 
-### Steps:
+Steps:
 
 1. Push your code to a GitHub repository.
-2. Go to [Vercel](https://vercel.com/).
-3. Import the GitHub repo.
-4. Click **Deploy** — that’s it!
-   Vercel automatically detects the React project and builds it.
 
-✅ **Live Link Example:**
-[https://companies-directory.vercel.app](https://companies-directory.vercel.app)
+
+2. Go to Vercel.
+
+
+3. Import the GitHub repo.
+
+
+4. Click Deploy — that’s it!
+Vercel automatically detects the React project and builds it.
+
+
+
+✅ Live Link Example:
+https://companies-directory.vercel.app
+
 
 ---
 
-## 🧾 Summary
+🧾 Summary
 
 This project demonstrates:
 
-* Clear understanding of **React fundamentals** (hooks, props, context)
-* Efficient **state management**
-* **Clean modular design** using reusable components
-* **Frontend architecture** optimized for readability and performance
+Clear understanding of React fundamentals (hooks, props, context)
+
+Efficient state management
+
+Clean modular design using reusable components
+
+Frontend architecture optimized for readability and performance
+
+
 
 ---
 
-## 👨‍💻 Author
+👨‍💻 Author
 
-**Chaitanya Panja**
-📧 Email: [panjachaitanya23@gmail.com](mailto:panjachaitanya23@gmail.com)
-🔗 GitHub: [https://github.com/PanjaChaitanya](https://github.com/PanjaChaitanya)
-🔗 LinkedIn: [https://www.linkedin.com/in/chaitanyapanja](https://www.linkedin.com/in/chaitanyapanja)
+Chaitanya Panja
+📧 Email: panjachaitanya23@gmail.com
+🔗 GitHub: https://github.com/PanjaChaitanya
+🔗 LinkedIn: https://www.linkedin.com/in/chaitanyapanja
+
 
 ---
 
-### 🏁 Final Output Preview
+🏁 Final Output Preview
 
-![Project Screenshot](./screenshot.png)
+
 
 > Built with ❤️ using React.js and Tailwind CSS.
 
-```
+
 
 ---
-
-Would you like me to **add a “Video Demo” section** (with a placeholder for your Loom or YouTube link and description timestamps)?  
-That makes it perfect for evaluation submissions and portfolio uploads.
-```
