@@ -1,5 +1,3 @@
----
-
 ```markdown
 # 🏢 Companies Directory — Frontend Project
 
