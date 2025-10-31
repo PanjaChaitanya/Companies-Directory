@@ -1,5 +1,3 @@
----
-
 ```markdown
 # 🏢 Companies Directory — Frontend Project
 
@@ -7,8 +5,6 @@ A responsive and dynamic **Companies Directory** web application built using **R
 This project was developed as part of the **Frontlines Media Technical Assessment**.
 
 It showcases the use of **React Context API**, **custom filtering**, **sorting**, **pagination**, and a **modular UI design** — all without external API calls (using a mock `companies.json` file).
-
----
 
 ## 🚀 Features
 
