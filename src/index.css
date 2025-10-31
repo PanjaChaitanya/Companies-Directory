@@ -24,7 +24,7 @@ body{
   border-radius: 6px;
   padding: 5px 10px;
   position: absolute;
-  z-index: 1;
+  z-index: 60;
   bottom: 150%;
   left: 50%;
   margin-left: -60px;
@@ -44,7 +44,9 @@ body{
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
-
+.card:hover h3{
+  color: #11a0ff;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;

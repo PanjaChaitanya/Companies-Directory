@@ -37,7 +37,7 @@ const CompanyList = () => {
 
   if (loading) return <div className="p-6 text-center">Loading companies...</div>;
   if (error) return <div className="p-6 text-center text-red-600">Failed to load company data.</div>;
-  if (!total) return <div className="p-6 text-center">No companies found.</div>;
+  if (!total) return <div className="p-6 text-center ">No companies found.</div>;
 
   return (
     <div>

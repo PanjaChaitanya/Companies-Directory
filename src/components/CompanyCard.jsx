@@ -13,7 +13,7 @@ const CompanyCard = ({ company }) => {
   return (
     <>
       {/* Card */}
-      <div className="cursor-pointer rounded-lg border border-neutral-200 shadow-md hover:shadow-lg hover:shadow-blue-200 transition p-4 bg-white" onClick={openModal}> 
+      <div className="card cursor-pointer rounded-lg border border-neutral-200 shadow-md hover:shadow-lg hover:shadow-blue-200 transition p-4 bg-white" onClick={openModal}> 
         {/* Header */} 
         <div className="flex flex-wrap justify-between items-start mb-3">
           <div className="flex items-center gap-3">
@@ -21,14 +21,14 @@ const CompanyCard = ({ company }) => {
               <Building2 className="h-6 w-6 text-white" />
             </div>
             <div> 
-              <h3 className="text-lg font-semibold text-gray-800 hover:text-[#3869EC]">{company.name}</h3> 
+              <h3 className="text-lg font-semibold text-gray-800">{company.name}</h3> 
               <div className="flex items-center gap-1 mt-1 text-gray-500 text-sm">
                 <MapPin className="h-4 w-4" /> {company.location}
               </div>
             </div>
           </div>
           <div className="flex items-center gap-1 bg-gray-100 px-2 py-1 rounded-xl text-sm font-medium tooltip">
-            <Briefcase className="h-3 w-3 " /> {company.industry} <span class="tooltiptext">Industry</span> 
+            <Briefcase className="h-3 w-3 " /> {company.industry} <span className="tooltiptext">Industry</span> 
           </div>
         </div> 
 
@@ -38,7 +38,19 @@ const CompanyCard = ({ company }) => {
         
         */} 
         
-        {/* Footer */} <div className="flex justify-between items-center border-t border-gray-400 pt-3 pb-6 mt-2 text-sm text-gray-500"> <div className="flex gap-4"> <div className="flex items-center gap-1 tooltip"> <Users className="h-4 w-4" /> {company.employees} <span class="tooltiptext">Employees</span> </div> </div> <button className="flex items-center gap-1 p-2 rounded-xl font-semibold hover:bg-[#E6EEFB] hover:text-blue-400 text-gray-700 hover:underline" onClick={(e) => { e.stopPropagation(); window.open(company.website, "_blank"); }} > Visit <ExternalLink className="h-4 w-4" /> </button> </div> </div>
+        {/* Footer */}
+        <div className="flex justify-between items-center border-t border-gray-400 pt-3 pb-6 mt-2 text-sm text-gray-500">
+          <div className="flex gap-4"> <div className="flex items-center gap-1 tooltip"> 
+            <Users className="h-4 w-4" /> {company.employees} <span className="tooltiptext">Employees</span> 
+          </div> 
+        </div> 
+        <button 
+          className="flex items-center gap-1 p-2 rounded-xl font-semibold hover:bg-[#E6EEFB] hover:text-blue-400 text-gray-700 hover:underline" 
+          onClick={(e) => { e.stopPropagation(); window.open(company.website, "_blank"); }} > 
+          Visit <ExternalLink className="h-4 w-4" /> 
+        </button>
+        </div> 
+      </div>
 
       {/* Modal */}
       {isOpen && (

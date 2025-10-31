@@ -5,7 +5,7 @@ import Home from './pages/Home';
 export default function App() {
   return (
     <CompanyProvider>
-      <div className="min-h-screen">
+      <div className="max-h-screen">
         <Home />
       </div>
     </CompanyProvider>

@@ -24,7 +24,7 @@ const FilterBar = () => {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow mb-4">
+    <div className="bg-white p-2 rounded-lg shadow mb-2">
       <div className="flex flex-col md:flex-row gap-3">
         <input
           value={search}
@@ -50,7 +50,9 @@ const FilterBar = () => {
           <option value="employees-asc">Employees ↑</option>
         </select>
 
-        <button onClick={onReset} className="bg-red-500 text-white px-3 py-2 rounded-full tooltip"><BadgeX /><span class="tooltiptext">Cancel</span></button>
+        <button onClick={onReset} className="bg-red-500 text-white px-3 py-2 rounded-full tooltip">
+          <BadgeX /><span className="tooltiptext">Cancel</span>
+        </button>
       </div>
     </div>
   );
